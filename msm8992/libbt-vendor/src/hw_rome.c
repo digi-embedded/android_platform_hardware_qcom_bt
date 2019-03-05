@@ -1084,8 +1084,10 @@ int rome_download_tlv_file(int fd)
         pdata_buffer = NULL;
     }
     /* NVM TLV file Downloading */
-    if((tlv_size = rome_get_tlv_file(nvm_file_path)) < 0)
+    if((tlv_size = rome_get_tlv_file(nvm_file_path)) < 0) {
+        err = -1;
         goto error;
+    }
 
     if((err =rome_tlv_dnld_req(fd, tlv_size)) <0 )
         goto error;
